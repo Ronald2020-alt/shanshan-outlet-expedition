@@ -47,6 +47,43 @@ html[data-motion=reduced] *,html[data-motion=reduced] *:before,html[data-motion=
 @media(max-width:760px){.topbar{height:calc(71px + var(--safe-top));padding-top:var(--safe-top)}.sound-toggle{gap:6px;min-height:44px}.sound-toggle #sound-state{display:none}.experience-label{font-size:11px}.equalizer{gap:2px}.equalizer i{width:2px}.topbar nav{gap:12px}.topbar nav button{min-height:44px}.stepper button{width:36px;height:36px}.resource-row{gap:10px}.mission-bottom{position:sticky;bottom:0;padding:9px 0 calc(9px + var(--safe-bottom));background:#051928f5;z-index:3;border-top:1px solid #ffffff0d}.mission-bottom>span{display:none}.mission-bottom button{min-height:36px}.hero-image{animation-duration:35s}.chapter-banner{top:calc(82px + var(--safe-top));padding:19px 26px;min-width:255px}.chapter-banner strong{font-size:23px}.experience-row small{font-size:11px}#toast{bottom:calc(70px + var(--safe-bottom));font-size:12px;max-width:calc(100vw - 32px)}.story-image span{font-size:11px}.boarding .start-audio-note{font-size:10px}.primary{min-height:50px}}
 @media(max-width:380px){.topbar{padding-left:13px;padding-right:13px}.topbar nav{gap:9px}.experience-label{font-size:10px}.sound-toggle{padding-left:9px}.experience-row{gap:12px}.hero-meta{gap:28px}.resource-row p{max-width:145px}}
 dialog.wide-dialog{width:min(1400px,calc(100% - 32px))}.wide-dialog .original-image{display:block;width:100%;height:auto}
+
+/* v2.2 mobile: readable choices, thumb targets, safe areas and keyboard-safe dialogs. */
+html{-webkit-text-size-adjust:100%;scroll-padding-bottom:90px}
+.experience-row input:disabled+.switch-visual{opacity:.35}
+.hold-button{touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.mobile-challenge-jump{display:none}
+dialog{overscroll-behavior:contain;overflow-y:auto}
+@media(max-width:760px){
+ .topbar{height:auto;min-height:calc(76px + var(--safe-top));flex-wrap:wrap;gap:8px;padding:calc(10px + var(--safe-top)) max(16px,env(safe-area-inset-right)) 10px max(16px,env(safe-area-inset-left))}
+ .topbar .brand{min-height:44px}.topbar nav{flex:1;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+ .topbar nav button{font-size:12px;padding:8px 4px}.topbar .sound-toggle{padding-left:10px}.experience-label{font-size:12px}
+ .topbar #badge-count{display:none}
+ .mission{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+ .mobile-challenge-jump{display:inline-flex;align-items:center;justify-content:center;color:var(--goldlight)!important}
+ .mission-bottom{gap:8px;margin-top:16px;border-radius:8px 8px 0 0;padding-left:8px;padding-right:8px}
+ .mission-bottom button{min-height:44px;font-size:12px;padding:8px 4px}
+ .challenge{scroll-margin-top:16px;scroll-margin-bottom:90px}.feedback{scroll-margin-top:20px;scroll-margin-bottom:90px}
+ .option,.multi-grid .option{font-size:15px;line-height:1.75;min-height:60px;padding:14px;gap:12px}
+ .multi-grid{grid-template-columns:1fr}.match-card{font-size:14px;line-height:1.8;overflow-wrap:anywhere}
+ .stepper button{width:44px;height:44px;font-size:20px}.stepper{gap:6px}
+ .resource-row{align-items:flex-start}.resource-row p{font-size:12px;max-width:none;line-height:1.7}
+ .resource-row strong{font-size:14px}.resource-row>div:first-child{flex:1}
+ .order-slot button{min-width:44px;min-height:44px;flex-shrink:0;font-size:20px}
+ .order-slot{gap:8px;padding:6px 10px}.order-slot>span:nth-child(2){flex:1;min-width:0}
+ .text-button,.icon-button{min-height:44px}.icon-button{min-width:44px}
+ .action-row>.primary,.feedback>.primary{width:100%;min-height:50px}
+ dialog{width:calc(100% - 24px);max-height:calc(100dvh - 24px - var(--safe-top) - var(--safe-bottom));padding:0 20px calc(22px + var(--safe-bottom));border-radius:18px}
+ .dialog-head{position:sticky;top:0;z-index:5;background:#0c2b40;margin:0 -2px 20px;padding:16px 0 12px;gap:12px}
+ .dialog-head h2{font-size:20px;line-height:1.5}.form-label input,.form-label select{font-size:16px;min-height:48px}
+ .experience-row input{height:44px;top:50%;transform:translateY(-50%)}.volume-control input{height:44px}
+ .experience-row small{font-size:12px}.experience-actions{flex-wrap:wrap}.experience-actions .secondary{flex:1;min-height:48px}
+ .story-image{height:150px}.story-copy{padding:20px}.story-copy p{font-size:15px}
+ .hero-image{animation:none;will-change:auto}.hero-atmosphere i:nth-child(n+4){display:none}
+ .boarding{backdrop-filter:none}.chapter-banner{max-width:calc(100vw - 32px)}
+ .global-footer{flex-wrap:wrap;line-height:1.7}
+}
+@media(max-width:420px){.topbar .brand{flex:1}.topbar nav{flex-basis:100%;justify-content:space-between}.topbar .brand-game{display:block;font-size:15px}.topbar .brand-game small{font-size:8px}.topbar .brand-divider{display:block}.topbar .brand{gap:14px}.resource-row{flex-wrap:wrap}.resource-row>div:first-child{flex-basis:100%}.resource-row .stepper{margin-left:auto}.matches{gap:8px}}
 </style>
 
 </head>
@@ -107,7 +144,7 @@ L(28,'长路有你，品质同行',5,'finish','你已走过这段远征，下一
 ];
 const modes={full:{name:'完整远征',label:'员工学习',desc:'完整走过创业、理念屋与五大战役',ids:levels.map(l=>l.id),time:'约 25–35 分钟'},recruit:{name:'新星启程',label:'校招体验',desc:'认识杉杉的成长故事与文化主张',ids:[0,1,2,3,4,5,6,7,8,9,10,11,12,15,16,18,25,27,28],time:'约 15–22 分钟'},story:{name:'文化漫游',label:'公众体验',desc:'用一段轻旅程，了解品质与人文',ids:[0,1,2,4,12,13,15,17,18,24,25,28],time:'约 8–15 分钟'}};
 const badges=[['远路者',[0],'迈出远征第一步'],['开拓者',[1,2,3,4],'完成与巨人同行'],['逆行者',[5,6,7,8],'完成冰城淬火'],['领跑者',[9,10,11,12],'完成弯道超车'],['品质布道者',[13,14,15],'理解品质转型'],['理念屋攀登者',[16,17,18],'完成理念屋三关'],['五战点将者',[19,20,21,22,23],'完成五大必赢之战'],['终极远征者',[24,25,26,27],'完成文化综合挑战'],['远征者',levels.map(l=>l.id),'完成完整模式 29 关'],['合作箴言',[1,3,4,6,10],'收集五段合作与创业金句'],['冰城淬火',[5],'完成筹建资源挑战'],['十九座灯火',[12],'点亮历史里程碑'],['人文四面镜',[24],'理解人文奥莱四个面向'],['健康奋斗',[25],'理解健康的双重维度'],['四个一攀登者',[26],'复原四个一战略'],['百年远征答卷人',[27],'完成五道综合题']];
-return {version:'2.1.0',dimensions,values,battles,chapterNames,levels,modes,badges};
+return {version:'2.2.0',dimensions,values,battles,chapterNames,levels,modes,badges};
 })();
 
 /* Original adaptive score and sensory feedback. No samples or network services. */
@@ -123,6 +160,7 @@ return {version:'2.1.0',dimensions,values,battles,chapterNames,levels,modes,badg
   } catch (_) {}
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   let context, musicBus, fxBus, compressor, room, filter, noise, pianoWave;
+  let audioError = false;
   let activated = false, nextBar = 0, barIndex = 0, chapter = 0, scene = 'home', scheduler = 0, lastHaptic = 0, lastClick = 0;
   const sources = new Set();
   const progressions = [
@@ -139,13 +177,23 @@ return {version:'2.1.0',dimensions,values,battles,chapterNames,levels,modes,badg
   }
   applyMotion();
   reduced.addEventListener?.('change', applyMotion);
-  function emit() { window.dispatchEvent(new CustomEvent('expedition:experience')); }
+  function audioStatus() {
+    if (!prefs.music && !prefs.sfx) return '声音已关闭，可打开上方开关。';
+    if (context?.state === 'running') return '声音引擎已启动。若听不到，请调高手机媒体音量，检查蓝牙输出；旧版 iOS 请关闭静音模式。';
+    return audioError ? '声音尚未启动，请再次点按下方“开启声音 / 试听”。' : '点按下方“开启声音 / 试听”，允许浏览器播放声音。';
+  }
+  function emit() {
+    document.querySelectorAll?.('[data-audio-status]').forEach(el => { el.textContent = audioStatus(); });
+    window.dispatchEvent(new CustomEvent('expedition:experience'));
+  }
   function persist() { try { localStorage.setItem(KEY, JSON.stringify(prefs)); } catch (_) {} applyMotion(); emit(); }
   function initAudio() {
     if (context) return true;
     const Audio = window.AudioContext || window.webkitAudioContext;
     if (!Audio) return false;
     try {
+      // Declare media playback before creating the context (iOS silent-switch routing).
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {}
       context = new Audio();
       musicBus = context.createGain();
       fxBus = context.createGain();
@@ -169,8 +217,16 @@ return {version:'2.1.0',dimensions,values,battles,chapterNames,levels,modes,badg
       noise = context.createBuffer(1, context.sampleRate / 4, context.sampleRate);
       for (let i = 0; i < noise.length; i++) noise.getChannelData(0)[i] = Math.sin(i * 123.31) * Math.sin(i * 19.77);
       pianoWave = context.createPeriodicWave(new Float32Array([0,0,0,0,0,0]), new Float32Array([0,1,0.3,0.13,0.06,0.025]));
+      context.onstatechange = () => {
+        if (context.state === 'running') { audioError = false; schedule(); }
+        emit();
+      };
       return true;
-    } catch (_) { return false; }
+    } catch (_) {
+      try { context?.close()?.catch(() => {}); } catch (_) {}
+      context = null; audioError = true;
+      return false;
+    }
   }
   function tone(note, time, duration, gain, type = 'piano', target = musicBus) {
     if (!context) return;
@@ -217,12 +273,32 @@ return {version:'2.1.0',dimensions,values,battles,chapterNames,levels,modes,badg
   }
   async function unlock() {
     activated = true;
-    if (!prefs.music && !prefs.sfx) { emit(); return; }
-    if (!initAudio()) { emit(); return; }
-    try { await context.resume(); } catch (_) {}
-    if (!scheduler) scheduler = setInterval(schedule, 110);
+    if (!prefs.music && !prefs.sfx) { emit(); return false; }
+    if (!initAudio()) { audioError = true; emit(); return false; }
+    // Both resume and a one-frame buffer start happen synchronously inside the tap.
+    // Do not await other work before these calls: Safari requires user activation.
+    let resuming;
+    try {
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (_) {}
+      resuming = context.state === 'running' ? Promise.resolve() : context.resume();
+      const prime = context.createBufferSource();
+      prime.buffer = context.createBuffer(1, 1, context.sampleRate);
+      prime.connect(context.destination); prime.onended = () => prime.disconnect();
+      prime.start(0);
+      if (!scheduler) scheduler = setInterval(schedule, 110);
+      await Promise.race([resuming, new Promise(resolve => setTimeout(resolve, 1500))]);
+      audioError = context.state !== 'running';
+    } catch (_) { audioError = true; }
     schedule(); emit();
+    return !audioError;
   }
+  // Retry interrupted audio on a real tap, including after returning from lock screen.
+  document.addEventListener('click', event => {
+    const button = event.target.closest?.('[data-action]');
+    if (!button || button.disabled) return;
+    if (['new','resume','preview-feedback'].includes(button.dataset.action) ||
+        (activated && context?.state !== 'running' && (prefs.music || prefs.sfx))) unlock();
+  }, true);
   function setScene(nextScene, nextChapter = chapter) {
     const changed = chapter !== nextChapter || (scene === 'finish') !== (nextScene === 'finish');
     scene = nextScene; chapter = nextChapter;
@@ -284,8 +360,8 @@ return {version:'2.1.0',dimensions,values,battles,chapterNames,levels,modes,badg
     document.body.append(el); setTimeout(() => el.remove(), 900);
   }
   function settingsHTML() {
-    const row = (key, title, sub) => `<label class="experience-row"><span><strong>${title}</strong><small>${sub}</small></span><input type="checkbox" data-experience="${key}" ${prefs[key] ? 'checked' : ''}><span class="switch-visual" aria-hidden="true"></span></label>`;
-    return `<div class="experience-intro"><span class="audio-orbit" aria-hidden="true">♪</span><div><strong>让远征，多一点身临其境。</strong><p>声音、触感与动态，按你的喜好调整。</p></div></div>${row('music','背景音乐','原创轻音乐，随章节切换氛围')}<label class="volume-control">音乐音量 <input aria-label="背景音乐音量" data-experience="musicVolume" type="range" min="0" max="1" step="0.01" value="${prefs.musicVolume}"><output>${Math.round(prefs.musicVolume*100)}%</output></label>${row('sfx','交互音效','点击、配对、通关与文化印记')}${row('haptics','触感反馈',typeof navigator.vibrate === 'function'?'在支持的手机上轻触回应':'当前浏览器不支持震动，将保留视觉反馈')}${row('motion','动态效果',reduced.matches?'已跟随系统“减少动态效果”设置':'章节入场、光影与完成庆祝')}<div class="experience-actions"><button class="secondary" data-action="preview-feedback">试听与触感测试</button><button class="text-button" data-action="mute-all">一键静音</button></div><p class="form-note">音乐在你开始游戏或主动试听后播放；切到其他页面或锁屏时暂停。iPhone 等不支持网页震动的设备不会震动。</p>`;
+    const row = (key, title, sub) => `<label class="experience-row"><span><strong>${title}</strong><small>${sub}</small></span><input type="checkbox" data-experience="${key}" ${key === 'haptics' && typeof navigator.vibrate !== 'function' ? 'disabled' : (prefs[key] ? 'checked' : '')}><span class="switch-visual" aria-hidden="true"></span></label>`;
+    return `<div class="experience-intro"><span class="audio-orbit" aria-hidden="true">♪</span><div><strong>让远征，多一点身临其境。</strong><p>声音、触感与动态，按你的喜好调整。</p></div></div>${row('music','背景音乐','原创轻音乐，随章节切换氛围')}<label class="volume-control">音乐音量 <input aria-label="背景音乐音量" data-experience="musicVolume" type="range" min="0" max="1" step="0.01" value="${prefs.musicVolume}"><output>${Math.round(prefs.musicVolume*100)}%</output></label>${row('sfx','交互音效','点击、配对、通关与文化印记')}${row('haptics','触感反馈',typeof navigator.vibrate === 'function'?'在支持的手机上轻触回应':'当前浏览器不支持震动，将保留视觉反馈')}${row('motion','动态效果',reduced.matches?'已跟随系统“减少动态效果”设置':'章节入场、光影与完成庆祝')}<p class="form-note" data-audio-status role="status">${audioStatus()}</p><div class="experience-actions"><button class="secondary" data-action="preview-feedback">开启声音 / 试听</button><button class="text-button" data-action="mute-all">一键静音</button></div><p class="form-note">声音兼容版 2.2.0 · 音乐在你开始游戏或主动试听后播放；切到其他页面或锁屏时暂停。iPhone 等不支持网页震动的设备不会震动。</p>`;
   }
   document.addEventListener('visibilitychange', () => {
     if (!context || !activated) return;
@@ -297,7 +373,7 @@ return {version:'2.1.0',dimensions,values,battles,chapterNames,levels,modes,badg
   window.ExpeditionExperience = {
     unlock, fx, setScene, setting, ripple, burst, settingsHTML,
     get preferences() { return { ...prefs }; },
-    get status() { return { activated, musicPlaying: !!(activated && prefs.music && context?.state === 'running'), audioSupported: !!(window.AudioContext || window.webkitAudioContext), vibrationSupported: typeof navigator.vibrate === 'function', reducedMotion: reduced.matches || !prefs.motion, scheduledVoices: sources.size, chapter, scene }; }
+    get status() { return { activated, musicPlaying: !!(activated && prefs.music && prefs.musicVolume > 0 && !document.hidden && context?.state === 'running'), audioState: context?.state || 'idle', audioError, audioSupported: !!(window.AudioContext || window.webkitAudioContext), vibrationSupported: typeof navigator.vibrate === 'function', reducedMotion: reduced.matches || !prefs.motion, scheduledVoices: sources.size, chapter, scene }; }
   };
 })();
 
@@ -353,6 +429,7 @@ function switchView(name){tick();cancelHold();view=name;lastTick=performance.now
 function mount(html){main.innerHTML=html;main.classList.remove('view-enter');void main.offsetWidth;main.classList.add('view-enter');updateBadgeCount();}
 function toast(message){clearTimeout(toastTimer);$('#toast').textContent=message;$('#toast').classList.add('show');toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),3200);}
 function openDialog(title,html){dialog.classList.remove('wide-dialog');dialogReturn=document.activeElement;$('#dialog-title').textContent=title;$('#dialog-content').innerHTML=html;if(!dialog.open)dialog.showModal();}
+function revealFeedback(){if(!matchMedia('(max-width:760px)').matches)return;const el=$('#challenge .feedback');el?.scrollIntoView?.({block:'nearest',behavior:X.status.reducedMotion?'instant':'smooth'});}
 function closeDialog(){dialog.classList.remove('wide-dialog');dialog.close();if(dialogReturn?.isConnected)dialogReturn.focus();}
 $('#close-dialog').addEventListener('click',closeDialog);
 dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeDialog();}});
@@ -373,10 +450,10 @@ function sidebar(){const p=profile();return `<aside class="sidebar"><div class="
 const imageCaptions={'executive_team.jpg':'杉杉奥莱 · 同心同行','zhengzhou_outlet.jpg':'杉杉奥莱 · 城市品质生活','chengdu_outlet.jpg':'杉杉奥莱 · 品质奥莱，惊喜常在','dalian_open.jpg':'杉杉奥莱 · 新的起点','ningbo_tower.jpg':'杉杉奥莱 · 向上生长','ningbo_tower_top.jpg':'杉杉奥莱 · 共赴远方','quality_journey.jpg':'杉杉奥莱 · 品质远征'};
 const imageFor=l=>l.image||(l.chapter===1?'executive_team.jpg':l.chapter===2?'zhengzhou_outlet.jpg':l.chapter===3?'chengdu_outlet.jpg':l.id>=19&&l.id<=23?'quality_journey.jpg':'ningbo_tower_top.jpg');
 function renderPlay(){const l=D.levels[currentId],p=profile();if(l.type==='finish')return renderCompletion();const position=ids().indexOf(currentId)+1,d=draft();
- mount(`<div class="play-layout">${sidebar()}<section class="mission"><div class="mission-top"><div><span>${D.chapterNames[l.chapter]}</span><div class="level-dots">${ids().map(i=>`<span class="${p.done[i]?'done':i===currentId?'now':''}"></span>`).join('')}</div></div><span><b>${num(position)}</b> / ${num(ids().length)}　${d.complete?'本段完成':p.done[currentId]?'复习关卡':'正在远征'}</span></div><div class="level-scene"><article class="story-pane"><div class="story-image"><img src="${assetUrl(imageFor(l))}" alt="${l.imageLabel||imageCaptions[imageFor(l)]||'杉杉奥莱'}"><span>${l.imageLabel||imageCaptions[imageFor(l)]||'杉杉奥莱 · 品质同行'}</span></div><div class="story-copy"><div class="eyebrow">CHAPTER ${num(l.chapter)} · MISSION ${num(currentId)}</div><h1>${l.title}</h1><p>${l.body}</p>${l.quote?`<blockquote class="story-quote">“${l.quote}”</blockquote>`:''}<div class="source-tag">${['resource','choice','match','multi','battle'].includes(l.type)?'文化在心 · 行动在先':'沿着来路 · 走向远方'}${l.house?' · 可在文化手册查看完整理念屋':''}</div></div></article><section class="challenge" id="challenge" aria-label="关卡挑战">${renderChallenge(l,d)}</section></div><div class="mission-bottom">${action('map','← 返回远征地图','text-button')}<span>可随时离开 · 进度自动保存在本机</span>${action('hint','查看提示','text-button')}</div></section></div>`);
+ mount(`<div class="play-layout">${sidebar()}<section class="mission"><div class="mission-top"><div><span>${D.chapterNames[l.chapter]}</span><div class="level-dots">${ids().map(i=>`<span class="${p.done[i]?'done':i===currentId?'now':''}"></span>`).join('')}</div></div><span><b>${num(position)}</b> / ${num(ids().length)}　${d.complete?'本段完成':p.done[currentId]?'复习关卡':'正在远征'}</span></div><div class="level-scene"><article class="story-pane"><div class="story-image"><img src="${assetUrl(imageFor(l))}" alt="${l.imageLabel||imageCaptions[imageFor(l)]||'杉杉奥莱'}"><span>${l.imageLabel||imageCaptions[imageFor(l)]||'杉杉奥莱 · 品质同行'}</span></div><div class="story-copy"><div class="eyebrow">CHAPTER ${num(l.chapter)} · MISSION ${num(currentId)}</div><h1>${l.title}</h1><p>${l.body}</p>${l.quote?`<blockquote class="story-quote">“${l.quote}”</blockquote>`:''}<div class="source-tag">${['resource','choice','match','multi','battle'].includes(l.type)?'文化在心 · 行动在先':'沿着来路 · 走向远方'}${l.house?' · 可在文化手册查看完整理念屋':''}</div></div></article><section class="challenge" id="challenge" aria-label="关卡挑战">${renderChallenge(l,d)}</section></div><div class="mission-bottom">${action('map','← 返回远征地图','text-button')}<span>可随时离开 · 进度自动保存在本机</span>${action('jump-challenge','前往答题 ↓','text-button mobile-challenge-jump')}${action('hint','查看提示','text-button')}</div></section></div>`);
  bindHold();
 }
-function refreshChallenge(){const focused=document.activeElement, focusAction=focused?.dataset?.action, focusIndex=focused?.dataset?.index;const el=$('#challenge');if(el)el.innerHTML=renderChallenge(D.levels[currentId],draft());updateBadgeCount();bindHold();save();if(focusAction&&el){const nextFocus=[...el.querySelectorAll('[data-action]')].find(b=>b.dataset.action===focusAction&&b.dataset.index===focusIndex&&!b.disabled);nextFocus?.focus({preventScroll:true});}}
+function refreshChallenge(){const focused=document.activeElement, focusAction=focused?.dataset?.action, focusIndex=focused?.dataset?.index;const el=$('#challenge');if(el)el.innerHTML=renderChallenge(D.levels[currentId],draft());updateBadgeCount();bindHold();save();if(focusAction&&el){const nextFocus=[...el.querySelectorAll('[data-action]')].find(b=>b.dataset.action===focusAction&&b.dataset.index===focusIndex&&!b.disabled);nextFocus?.focus({preventScroll:true});}revealFeedback();}
 const types={intro:'启程仪式',choice:'情境决策',order:'时间与逻辑',multi:'多项选择',resource:'资源沙盘',match:'连线配对',summit:'里程碑仪式',battle:'战略决策',exam:'综合答卷'};
 function shuffled(n,seed){const a=Array.from({length:n},(_,i)=>i);let s=seed+31;for(let i=n-1;i>0;i--){s=(s*9301+49297)%233280;const j=s%(i+1);[a[i],a[j]]=[a[j],a[i]];}if(n>1&&a.every((x,i)=>x===i))a.reverse();return a;}
 function renderOptions(l,d,multi=false){return `<div class="options ${multi?'multi-grid':''}">${l.options.map((s,i)=>`<button class="option ${d.selected.includes(i)?'selected':''} ${d.wrong===i?'wrong':''} ${d.complete&&d.selected.includes(i)?'correct':''}" data-action="${multi?'select':'answer'}" data-index="${i}" ${d.complete||d.examReady?'disabled':''} ${multi?`aria-pressed="${d.selected.includes(i)}"`:''}><span class="letter">${multi?(d.selected.includes(i)?'✓':'+'):String.fromCharCode(65+i)}</span><span>${esc(s)}</span></button>`).join('')}</div>`;}
@@ -397,7 +474,7 @@ function hintText(l,d){if(l.type==='exam')return l.questions[d.examIndex].explai
 function fail(message,index=null){const d=draft();if(d.complete)return;d.errors++;d.message=message;d.kind='error';d.wrong=index;if(d.errors>=3)d.hint=true;sound(false);refreshChallenge();}
 function completeLevel(silent=false){const l=D.levels[currentId],p=profile(),d=draft();if(d.complete)return;tick();const before=earned().map(b=>b[0]);d.complete=true;d.kind='success';d.message=l.memory||l.explain||l.quote||'每一个选择，都在让文化走向行动。';
  if(!p.done[currentId]){p.done[currentId]={score:Math.max(40,100-d.errors*15),errors:d.errors,seconds:Math.round(d.seconds),completedAt:new Date().toISOString(),...(l.type==='exam'?{examFirst:[...d.examFirst]}:{})};window.dispatchEvent(new CustomEvent('expedition:level-complete',{detail:{schema:1,mode:p.mode,levelId:currentId,score:p.done[currentId].score,errors:d.errors,seconds:Math.round(d.seconds)}}));}
- const fresh=earned().filter(b=>!before.includes(b[0]));save();if(!silent){if(!fresh.length)sound(true);else X.burst('success');if(fresh.length){X.fx('achievement');toast(`文化印记已入行囊：${fresh.map(b=>b[0]).join('、')}`);confetti();}renderPlay();$('#challenge [data-action=next]')?.focus({preventScroll:true});}
+ const fresh=earned().filter(b=>!before.includes(b[0]));save();if(!silent){if(!fresh.length)sound(true);else X.burst('success');if(fresh.length){X.fx('achievement');toast(`文化印记已入行囊：${fresh.map(b=>b[0]).join('、')}`);confetti();}renderPlay();$('#challenge [data-action=next]')?.focus({preventScroll:true});revealFeedback();}
 }
 function answer(i){const l=D.levels[currentId],d=draft();if(d.complete||d.examReady)return;const q=l.type==='exam'?l.questions[d.examIndex]:l;d.selected=[i];if(l.type==='exam'&&d.examFirst[d.examIndex]==null)d.examFirst[d.examIndex]=i===q.answer;
  if(i!==q.answer)return fail(q.explain,i);
@@ -432,13 +509,14 @@ function exportSave(){tick();save();download(new Blob([JSON.stringify({schema:2,
 function importSave(){openDialog('导入远征存档',`<p class="small-copy">选择本游戏导出的 JSON 文件。导入会作为新的档案保存，不覆盖现有记录。</p><label class="form-label">存档文件<input type="file" id="import-file" accept="application/json,.json"></label><p id="import-message" class="form-note">最多 2 MB；本机最多保存 50 份档案。</p>`);}
 async function readImport(file){const message=$('#import-message');if(!file)return;if(file.size>2*1024*1024){message.textContent='文件超过 2 MB，请选择本游戏导出的存档。';return;}try{const raw=JSON.parse(await file.text());if(raw.schema!==2||!Array.isArray(raw.profiles)||!raw.profiles.length||raw.profiles.length+db.profiles.length>50||!raw.profiles.every(validProfile))throw new Error('invalid');const pending=raw.profiles.map((p,i)=>({id:`import-${Date.now()}-${i}`,name:p.name.slice(0,16),department:p.department.slice(0,30),mode:p.mode,current:p.current,seconds:p.seconds,createdAt:new Date().toISOString(),done:Object.fromEntries(Object.entries(p.done).map(([id,r])=>[id,{score:r.score,errors:r.errors,seconds:r.seconds,completedAt:r.completedAt,...(Array.isArray(r.examFirst)?{examFirst:r.examFirst.slice(0,5).map(Boolean)}:{})}])),drafts:{}}));openDialog('存档已校验',`<p class="small-copy">检测到 ${pending.length} 份档案，将新增到本机：</p>${pending.map(p=>`<p class="small-copy">${esc(p.name)} · ${D.modes[p.mode].name} · ${doneCount(p)} 关</p>`).join('')}<p class="form-note">本地存档可由持有者修改，不作为正式考试或企业排名凭证。</p><button class="primary full" id="confirm-import">确认导入</button>`);$('#confirm-import').onclick=()=>{db.profiles.push(...pending);if(!profile())db.active=pending[0].id;save();closeDialog();records();toast('导入完成，已有记录未被覆盖');};}catch(e){message.textContent='文件格式或记录不符合当前版本，未导入任何数据。';}}
 function downloadCards(){const cards=D.levels.filter(l=>profile()?.done[l.id]&&(l.memory||l.quote));if(!cards.length)return toast('先完成一段旅程，再来收集记忆卡');const name=esc(profile().name);const html=`<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${name}的远征记忆卡</title><style>body{font-family:system-ui,sans-serif;background:#071e30;color:#f1f5f7;max-width:900px;margin:40px auto;padding:25px}h1{color:#dfbf82}article{border:1px solid #426075;border-radius:12px;padding:25px;margin:20px 0}p{line-height:1.9;color:#bdcfda}small{color:#dfbf82}@media print{body{background:white;color:#123}p{color:#345}article{break-inside:avoid}}</style><h1>${name}的远征记忆卡</h1><p>杉杉奥莱 · ${D.modes[profile().mode].name} · 可在浏览器中打印 / 另存为 PDF</p>${cards.map(l=>`<article><small>MEMORY ${num(l.id)}</small><h2>${l.title}</h2><p>${esc(l.memory||l.quote)}</p></article>`).join('')}</html>`;download(new Blob([html],{type:'text/html;charset=utf-8'}),'杉杉远征-我的记忆卡.html');toast('记忆卡已下载，可打开打印');}
-function poster(){const p=profile();if(!p?.done[28])return toast('完成本模式旅程后，可生成通关海报');const c=document.createElement('canvas');c.width=1080;c.height=1440;const ctx=c.getContext('2d');const g=ctx.createLinearGradient(0,0,1080,1440);g.addColorStop(0,'#164862');g.addColorStop(1,'#041724');ctx.fillStyle=g;ctx.fillRect(0,0,1080,1440);ctx.strokeStyle='#d9bb7d';ctx.lineWidth=2;ctx.strokeRect(55,55,970,1330);ctx.strokeStyle='#45657b';ctx.strokeRect(70,70,940,1300);ctx.textAlign='center';ctx.fillStyle='#dbbd80';ctx.font='24px sans-serif';ctx.fillText('SHANSHAN · THE QUALITY EXPEDITION',540,150);ctx.fillStyle='#f0f4f5';ctx.font='bold 80px serif';ctx.fillText('奥莱远征',540,320);ctx.fillStyle='#eed5a3';ctx.fillText('品质长征',540,430);ctx.font='27px sans-serif';ctx.fillText('长 路 有 你 · 品 质 同 行',540,510);ctx.strokeStyle='#dabd8177';ctx.beginPath();ctx.moveTo(220,570);ctx.lineTo(860,570);ctx.stroke();let fs=56;ctx.font=`${fs}px sans-serif`;while(ctx.measureText(p.name).width>830){fs-=2;ctx.font=`${fs}px sans-serif`;}ctx.fillStyle='#f0f4f5';ctx.fillText(p.name,540,695);ctx.font='25px sans-serif';ctx.fillStyle='#b8cdd9';ctx.fillText(`已完成「${D.modes[p.mode].name}」全部 ${ids().length} 关`,540,765);[`${score(p)}  积分`,`${earned().length}  枚印记`,`${accuracy(p)}%  首次无误率`].forEach((s,i)=>{ctx.fillStyle='#e3c58c';ctx.font='28px sans-serif';ctx.fillText(s,235+i*305,900);});ctx.font='32px serif';ctx.fillStyle='#e0e9ed';ctx.fillText('做一家对社会有价值，',540,1050);ctx.fillText('受人尊重的企业。',540,1107);ctx.font='22px sans-serif';ctx.fillStyle='#a5bdcc';ctx.fillText('杉杉奥莱 · 企业文化学习纪念',540,1250);ctx.font='19px sans-serif';ctx.fillText(`完成日期 ${new Date(p.done[28].completedAt).toLocaleDateString('zh-CN')}  ·  本机学习记录`,540,1305);openDialog('我的远征海报',`<img class="poster-preview" src="${c.toDataURL('image/png')}" alt="${esc(p.name)}的品质远征通关纪念海报"><button id="download-poster" class="primary full">下载 PNG 海报</button><p class="form-note" style="margin:14px 0 0">学习纪念海报，不作为人事、薪酬或正式培训认证凭证。</p>`);$('#download-poster').onclick=()=>c.toBlob(b=>{if(b)download(b,'杉杉远征-通关纪念海报.png');},'image/png');}
-function about(){openDialog('关于本次远征',`<p class="small-copy">「奥莱远征 · 品质长征」2.1<br>杉杉奥莱企业文化互动学习游戏。</p><p class="small-copy">沿着杉杉奥莱的发展足迹，理解品牌理念屋与五大必赢之战。经营场景和资源数值用于互动学习。</p><p class="small-copy">每关 100 分，首次通关每次错误扣 15 分，最低 40 分。不设速度奖励；重复练习不刷分。首次无误率＝零错误完成的关卡数 ÷ 已完成关卡数（含仪式关）。</p><p class="small-copy">所有数据保存在当前浏览器。个人与分组榜仅基于本机档案，不是联网企业排名。可在“我的行囊”导出备份。</p><p class="small-copy">支持鼠标、触屏与键盘。长按仪式提供直接点亮；系统开启减少动态效果时，游戏会减少动画。</p><p class="small-copy">三种模式共用文化内容，档案和成绩各自独立。短模式只解锁实际完成的徽章。企业微信登录、云端档案及部门 PK 可作为后续升级。</p>`);}
+function poster(){const p=profile();if(!p?.done[28])return toast('完成本模式旅程后，可生成通关海报');const c=document.createElement('canvas');c.width=1080;c.height=1440;const ctx=c.getContext('2d');const g=ctx.createLinearGradient(0,0,1080,1440);g.addColorStop(0,'#164862');g.addColorStop(1,'#041724');ctx.fillStyle=g;ctx.fillRect(0,0,1080,1440);ctx.strokeStyle='#d9bb7d';ctx.lineWidth=2;ctx.strokeRect(55,55,970,1330);ctx.strokeStyle='#45657b';ctx.strokeRect(70,70,940,1300);ctx.textAlign='center';ctx.fillStyle='#dbbd80';ctx.font='24px sans-serif';ctx.fillText('SHANSHAN · THE QUALITY EXPEDITION',540,150);ctx.fillStyle='#f0f4f5';ctx.font='bold 80px serif';ctx.fillText('奥莱远征',540,320);ctx.fillStyle='#eed5a3';ctx.fillText('品质长征',540,430);ctx.font='27px sans-serif';ctx.fillText('长 路 有 你 · 品 质 同 行',540,510);ctx.strokeStyle='#dabd8177';ctx.beginPath();ctx.moveTo(220,570);ctx.lineTo(860,570);ctx.stroke();let fs=56;ctx.font=`${fs}px sans-serif`;while(ctx.measureText(p.name).width>830){fs-=2;ctx.font=`${fs}px sans-serif`;}ctx.fillStyle='#f0f4f5';ctx.fillText(p.name,540,695);ctx.font='25px sans-serif';ctx.fillStyle='#b8cdd9';ctx.fillText(`已完成「${D.modes[p.mode].name}」全部 ${ids().length} 关`,540,765);[`${score(p)}  积分`,`${earned().length}  枚印记`,`${accuracy(p)}%  首次无误率`].forEach((s,i)=>{ctx.fillStyle='#e3c58c';ctx.font='28px sans-serif';ctx.fillText(s,235+i*305,900);});ctx.font='32px serif';ctx.fillStyle='#e0e9ed';ctx.fillText('做一家对社会有价值，',540,1050);ctx.fillText('受人尊重的企业。',540,1107);ctx.font='22px sans-serif';ctx.fillStyle='#a5bdcc';ctx.fillText('杉杉奥莱 · 企业文化学习纪念',540,1250);ctx.font='19px sans-serif';ctx.fillText(`完成日期 ${new Date(p.done[28].completedAt).toLocaleDateString('zh-CN')}  ·  本机学习记录`,540,1305);openDialog('我的远征海报',`<img class="poster-preview" src="${c.toDataURL('image/png')}" alt="${esc(p.name)}的品质远征通关纪念海报"><button id="download-poster" class="primary full">下载 PNG 海报</button><p class="form-note">手机也可长按上方海报，保存到相册。</p><p class="form-note" style="margin:14px 0 0">学习纪念海报，不作为人事、薪酬或正式培训认证凭证。</p>`);$('#download-poster').onclick=()=>c.toBlob(b=>{if(b)download(b,'杉杉远征-通关纪念海报.png');},'image/png');}
+function about(){openDialog('关于本次远征',`<p class="small-copy">「奥莱远征 · 品质长征」2.2.0<br>杉杉奥莱企业文化互动学习游戏。</p><p class="small-copy">沿着杉杉奥莱的发展足迹，理解品牌理念屋与五大必赢之战。经营场景和资源数值用于互动学习。</p><p class="small-copy">每关 100 分，首次通关每次错误扣 15 分，最低 40 分。不设速度奖励；重复练习不刷分。首次无误率＝零错误完成的关卡数 ÷ 已完成关卡数（含仪式关）。</p><p class="small-copy">所有数据保存在当前浏览器。个人与分组榜仅基于本机档案，不是联网企业排名。可在“我的行囊”导出备份。</p><p class="small-copy">支持鼠标、触屏与键盘。长按仪式提供直接点亮；系统开启减少动态效果时，游戏会减少动画。</p><p class="small-copy">三种模式共用文化内容，档案和成绩各自独立。短模式只解锁实际完成的徽章。企业微信登录、云端档案及部门 PK 可作为后续升级。</p>`);}
 function handleAction(button){const a=button.dataset.action,i=Number(button.dataset.index);if(button.disabled)return;
  const globalActions={home,continue:resume,new:newProfile,profiles,map:mapPage,archive:()=>archive(),records:()=>records(),about,export:exportSave,import:importSave,poster,'download-cards':downloadCards};if(globalActions[a])return globalActions[a]();
  if(a==='view-original'){const name=button.dataset.image;if(!['brand-house.jpeg','five-battles.jpeg'].includes(name))return;openDialog(name==='brand-house.jpeg'?'杉杉奥莱 · 品牌理念屋':'杉杉奥莱 · 五大必赢之战',`<img class="original-image" src="${assetUrl(name)}" alt="杉杉奥莱战略全图">`);dialog.classList.add('wide-dialog');return;}
+ if(a==='jump-challenge'){ $('#challenge')?.scrollIntoView({block:'start',behavior:X.status.reducedMotion?'instant':'smooth'});return;}
  if(a==='sound'){openDialog('声音与触感',X.settingsHTML());return;}
- if(a==='preview-feedback'){X.unlock().then(()=>X.fx('achievement'));return;}
+ if(a==='preview-feedback'){X.unlock().then(ok=>{if(ok){X.fx('achievement');X.burst('success');}});return;}
  if(a==='mute-all'){X.setting('music',false);X.setting('sfx',false);$('#dialog-content').innerHTML=X.settingsHTML();toast('音乐与音效已关闭');return;}
  if(a==='mode'){selectedMode=button.dataset.mode;return home();}
  if(a==='switch-profile'){db.active=button.dataset.id;selectedMode=profile().mode;closeDialog();return home();}
